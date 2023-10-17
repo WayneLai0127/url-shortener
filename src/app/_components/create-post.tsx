@@ -22,21 +22,21 @@ export function CreatePost() {
         e.preventDefault();
         createPost.mutate({ name });
       }}
-      className="flex flex-col gap-2"
+      className="flex flex-row gap-2"
     >
       <input
         type="text"
-        placeholder="Title"
+        placeholder="Paste url here"
         value={name}
         onChange={(e) => setName(e.target.value)}
-        className="w-full rounded-full px-4 py-2 text-black"
+        className="w-full rounded-full px-20 py-3 text-black"
       />
       <button
         type="submit"
-        className="rounded-full bg-white/10 px-10 py-3 font-semibold transition hover:bg-white/20"
-        disabled={createPost.isLoading}
+        className="rounded-full bg-white/10 px-5 py-3 font-semibold transition hover:bg-white/20"
+        disabled={createPost.isLoading || name === ""}
       >
-        {createPost.isLoading ? "Submitting..." : "Submit"}
+        {createPost.isLoading ? "Shortening..." : "Shorten"}
       </button>
     </form>
   );
