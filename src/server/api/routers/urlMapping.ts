@@ -5,7 +5,7 @@ import { generateUniqueToken } from "~/server/helpers/urlMapping";
 
 export const urlMappingRouter = createTRPCRouter({
   create: publicProcedure
-    .input(z.object({ longUrl: z.string().url() }))
+    .input(z.object({ longUrl: z.string().url("Incorrect url format") }))
     .mutation(async ({ ctx, input }) => {
       return ctx.db.urlMapping.create({
         data: {

@@ -1,5 +1,4 @@
-import { CreatePost } from "~/app/_components/create-post";
-import { api } from "~/trpc/server";
+import { CreateShortUrl } from "~/app/_components/create-short-url";
 
 export default function Home() {
   return (
@@ -9,24 +8,16 @@ export default function Home() {
           Shorten Your <span className="text-[hsl(280,100%,70%)]">URL</span>
         </h1>
 
-        <CrudShowcase />
+        <ShortUrlComponent />
       </div>
     </main>
   );
 }
 
-async function CrudShowcase() {
-  const latestPost = await api.post.getLatest.query();
-
+function ShortUrlComponent() {
   return (
     <div className="w-full max-w-lg">
-      {latestPost ? (
-        <p className="truncate">Your most recent post: {latestPost.name}</p>
-      ) : (
-        <p>You have no posts yet.</p>
-      )}
-
-      <CreatePost />
+      <CreateShortUrl />
     </div>
   );
 }

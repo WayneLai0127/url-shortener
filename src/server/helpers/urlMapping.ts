@@ -10,7 +10,7 @@ const generateShortToken = (length: number = TOKEN_LENGTH): string => {
     token += characters.charAt(randomIndex);
   }
   return token;
-}
+};
 
 const isTokenUnique = async (token: string) => {
   return (
