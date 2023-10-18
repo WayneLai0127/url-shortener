@@ -2,19 +2,29 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "cockroachdb"
-    url      = env("DATABASE_URL")
+  provider = "cockroachdb"
+  url      = env("DATABASE_URL")
 }
 
 model Post {
-    id        Int      @id @default(sequence())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  id        Int      @id @default(sequence())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-    @@index([name])
+  @@index([name])
+}
+
+model UrlMapping {
+  id        String   @id @default(cuid())
+  longUrl   String
+  token     String   @unique
+  expiresAt DateTime @default(dbgenerated("now() + interval '10 year'"))
+  createdAt DateTime @default(now())
+
+  @@index([token])
 }
