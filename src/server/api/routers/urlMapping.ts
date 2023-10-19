@@ -3,10 +3,25 @@ import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { generateUniqueToken } from "~/server/helpers/urlMapping";
 
+import { Ratelimit } from "@upstash/ratelimit"; // for deno: see above
+import { Redis } from "@upstash/redis";
+import { TRPCError } from "@trpc/server";
+
+// Create a new ratelimiter, that allows 10 requests per 1 second
+const ratelimit = new Ratelimit({
+  redis: Redis.fromEnv(),
+  limiter: Ratelimit.slidingWindow(10, "1 s"),
+  analytics: true,
+});
+
 export const urlMappingRouter = createTRPCRouter({
   create: publicProcedure
     .input(z.object({ longUrl: z.string().url("Incorrect url format") }))
     .mutation(async ({ ctx, input }) => {
+      // limit api request per system (still finding solution to get inbound ip address)
+      const { success } = await ratelimit.limit("api");
+      if (!success) throw new TRPCError({ code: "TOO_MANY_REQUESTS" });
+
       return ctx.db.urlMapping.create({
         data: {
           longUrl: input.longUrl,
