@@ -24,6 +24,7 @@ export const env = createEnv({
     UPSTASH_REDIS_REST_TOKEN: z
       .string()
       .refine(() => "Must provide redis url for rate limiting"),
+    CLERK_SECRET_KEY: z.string().refine(() => "Must provide for oauth"),
   },
 
   /**
@@ -33,6 +34,9 @@ export const env = createEnv({
    */
   client: {
     // NEXT_PUBLIC_CLIENTVAR: z.string(),
+    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z
+      .string()
+      .refine(() => "Must provide for oauth"),
   },
 
   /**
@@ -44,6 +48,9 @@ export const env = createEnv({
     NODE_ENV: process.env.NODE_ENV,
     UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL,
     UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN,
+    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
+      process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
+    CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**
