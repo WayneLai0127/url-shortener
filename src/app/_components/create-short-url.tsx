@@ -46,7 +46,7 @@ export function CreateShortUrl() {
             placeholder="Paste url here"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
-            className="w-full rounded-full px-20 py-3 text-black"
+            className="w-full rounded-full px-20 py-3 pl-5 pr-5 text-black"
           />
           <button
             type="submit"
