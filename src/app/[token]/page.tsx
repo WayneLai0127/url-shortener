@@ -6,7 +6,7 @@ async function FetchToken({ params }: { params: { token: string } }) {
     token: params.token,
   });
   if (!data) return redirect("/");
-  return redirect(data.longUrl);
+  return redirect(encodeURI(data.longUrl));
 }
 
 export default FetchToken;
