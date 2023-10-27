@@ -2,6 +2,24 @@
 
 This project is a URL shortener that allows you to create and manage shortened URLs. Users can access short URLs to redirect to the original web page.
 
+## Table of contents
+
+- [URL Shortener](#url-shortener)
+  - [Table of contents](#table-of-contents)
+  - [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Installation](#installation)
+    - [Usage](#usage)
+  - [Features](#features)
+  - [Built With](#built-with)
+  - [Pre-Commit Hooks](#pre-commit-hooks)
+    - [What It Does](#what-it-does)
+    - [How to Use](#how-to-use)
+  - [Dependencies](#dependencies)
+  - [Scripts](#scripts)
+  - [Roadmap](#roadmap)
+  - [Acknowledgments](#acknowledgments)
+
 ## Getting Started
 
 To get started with this project, follow these steps:
