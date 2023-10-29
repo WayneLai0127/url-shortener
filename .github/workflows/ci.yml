@@ -1,0 +1,31 @@
+name: CI
+
+on: [push, pull_request]
+
+env:
+  DATABASE_URL: "https://fake.com"
+  UPSTASH_REDIS_REST_URL: "https://fake.com"
+  UPSTASH_REDIS_REST_TOKEN: "FAKE_TOKEN"
+  NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: "FAKE_TOKEN"
+  CLERK_SECRET_KEY: "FAKE_TOKEN"
+  NEXT_PUBLIC_GITHUB_REPO_URL: "https://fake.com"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Dependencies
+        run: bun install
+
+      - name: Typecheck
+        run: bun run typecheck
+
+      - name: Lint
+        run: bun run lint
+
+      - name: Print Environment Variable
+        run: echo $MY_ENV_VAR

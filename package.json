@@ -10,7 +10,8 @@
     "postinstall": "prisma generate",
     "lint": "next lint",
     "start": "next start",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.25.6",
