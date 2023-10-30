@@ -81,7 +81,7 @@ All env variables except `NODE_ENV` should be added in the ENV section (but does
 
 Our complete CI configuration is defined in the [GitHub Actions workflow file](.github/workflows/ci.yml). You can review this file to understand the details of our CI setup, including the specific steps, tests, and checks that are run as part of the CI process.
 
-[![CI Status](https://github.com/WayneLai0127/url-shortener/workflows/CI/badge.svg)](https://github.com/WayneLai0127/url-shotener/actions)
+[![CI Status](https://github.com/WayneLai0127/url-shortener/workflows/CI/badge.svg)](https://github.com/WayneLai0127/url-shortener/actions)
 
 By providing this information, we aim to maintain transparency in our development process and ensure that our codebase is reliable and high-quality.
 
