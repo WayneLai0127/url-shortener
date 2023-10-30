@@ -1,5 +1,7 @@
 # URL Shortener
 
+[![CI Status](https://github.com/WayneLai0127/url-shortener/workflows/CI/badge.svg)](https://github.com/WayneLai0127/url-shortener/actions)
+
 This project is a URL shortener that allows you to create and manage shortened URLs. Users can access short URLs to redirect to the original web page.
 
 ## Table of contents
