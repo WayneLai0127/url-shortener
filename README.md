@@ -12,6 +12,9 @@ This project is a URL shortener that allows you to create and manage shortened U
     - [Usage](#usage)
   - [Features](#features)
   - [Built With](#built-with)
+  - [Continuous Integration (CI)](#continuous-integration-ci)
+    - [Environment Variables](#environment-variables)
+    - [CI Configuration](#ci-configuration)
   - [Pre-Commit Hooks](#pre-commit-hooks)
     - [What It Does](#what-it-does)
     - [How to Use](#how-to-use)
@@ -64,6 +67,23 @@ The t3-app (<https://create.t3.gg/>)
 - [React](https://reactjs.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - and more...
+
+## Continuous Integration (CI)
+
+Our project uses GitHub Actions for continuous integration (CI). The CI process plays a crucial role in ensuring code quality, running tests, and providing an extra layer of verification before code changes are merged into the project.
+Also, it reduces the build time at [Vercel](https://vercel.com) by HALF.
+
+### Environment Variables
+
+All env variables except `NODE_ENV` should be added in the ENV section (but doesn't have to be useable values) due to [Env Check](src/env.mjs).
+
+### CI Configuration
+
+Our complete CI configuration is defined in the [GitHub Actions workflow file](.github/workflows/ci.yml). You can review this file to understand the details of our CI setup, including the specific steps, tests, and checks that are run as part of the CI process.
+
+[![CI Status](https://github.com/WayneLai0127/url-shortener/workflows/CI/badge.svg)](https://github.com/WayneLai0127/url-shotener/actions)
+
+By providing this information, we aim to maintain transparency in our development process and ensure that our codebase is reliable and high-quality.
 
 ## Pre-Commit Hooks
 
