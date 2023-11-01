@@ -50,8 +50,8 @@ export const urlMappingRouter = createTRPCRouter({
       if (!success) throw new TRPCError({ code: "TOO_MANY_REQUESTS" });
       if (!(await isTokenUnique(input.alias)))
         throw new TRPCError({
-          code: "INTERNAL_SERVER_ERROR",
-          message: "Alias already exists",
+          code: "CONFLICT",
+          message: "ALIAS_ALREADY_EXIST",
         });
 
       return ctx.db.urlMapping.create({
