@@ -12,7 +12,7 @@ const generateShortToken = (length: number = TOKEN_LENGTH): string => {
   return token;
 };
 
-const isTokenUnique = async (token: string) => {
+export const isTokenUnique = async (token: string) => {
   return (
     (await db.urlMapping.count({
       where: {

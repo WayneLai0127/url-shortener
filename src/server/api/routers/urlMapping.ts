@@ -1,7 +1,14 @@
 import { z } from "zod";
 
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { generateUniqueToken } from "~/server/helpers/urlMapping";
+import {
+  createTRPCRouter,
+  privateProcedure,
+  publicProcedure,
+} from "~/server/api/trpc";
+import {
+  generateUniqueToken,
+  isTokenUnique,
+} from "~/server/helpers/urlMapping";
 
 import { Ratelimit } from "@upstash/ratelimit"; // for deno: see above
 import { Redis } from "@upstash/redis";
@@ -26,6 +33,31 @@ export const urlMappingRouter = createTRPCRouter({
         data: {
           longUrl: input.longUrl,
           token: await generateUniqueToken(),
+        },
+      });
+    }),
+
+  createWithAlias: privateProcedure
+    .input(
+      z.object({
+        longUrl: z.string().url("Incorrect url format"),
+        alias: z.string().min(1).max(32, "Alias too long"),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      // limit api request per system (still finding solution to get inbound ip address)
+      const { success } = await ratelimit.limit(ctx.userId);
+      if (!success) throw new TRPCError({ code: "TOO_MANY_REQUESTS" });
+      if (!(await isTokenUnique(input.alias)))
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Alias already exists",
+        });
+
+      return ctx.db.urlMapping.create({
+        data: {
+          longUrl: input.longUrl,
+          token: input.alias,
         },
       });
     }),
