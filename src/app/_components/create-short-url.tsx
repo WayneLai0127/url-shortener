@@ -77,7 +77,7 @@ export function CreateShortUrl() {
           }
           value={alias}
           onChange={(e) => setAlias(e.target.value)}
-          className="w-1/2 min-w-0 rounded-full px-20 py-3 pl-5 pr-5 text-black"
+          className="w-full min-w-0 rounded-full px-20 py-3 pl-5 pr-5 text-black lg:w-1/2"
           disabled={!isSignedIn}
         />
 
