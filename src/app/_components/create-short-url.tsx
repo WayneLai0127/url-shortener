@@ -92,9 +92,15 @@ export function CreateShortUrl() {
           <button
             type="submit"
             className="rounded-full bg-white/10 px-5 py-3 font-semibold transition hover:bg-white/20"
-            disabled={createUrlMapping.isLoading || url === ""}
+            disabled={
+              createUrlMapping.isLoading ||
+              createUrlMappingWithAlias.isLoading ||
+              url === ""
+            }
           >
-            {createUrlMapping.isLoading ? "Shortening..." : "Shorten"}
+            {createUrlMapping.isLoading || createUrlMappingWithAlias.isLoading
+              ? "Shortening..."
+              : "Shorten"}
           </button>
         </div>
         <Toaster position="bottom-center" />
