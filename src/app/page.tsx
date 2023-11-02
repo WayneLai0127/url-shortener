@@ -2,7 +2,8 @@
 import Link from "next/link";
 import { CreateShortUrl } from "~/app/_components/create-short-url";
 import { Github, ListTodo } from "lucide-react";
-import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
+import { SignInOutButton } from "./_components/authentication-button";
+import { useUser } from "@clerk/nextjs";
 
 export default function Home() {
   const { isLoaded: userLoaded, isSignedIn, user } = useUser();
@@ -13,10 +14,7 @@ export default function Home() {
     <main className="relative flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
       <header className="absolute right-0 top-0 p-4">
         <div className="flex flex-row gap-4">
-          {isSignedIn && (
-            <h3 style={{ marginTop: "4px" }}>Hello, {user.fullName}</h3>
-          )}
-          {isSignedIn ? <SignOutButton /> : <SignInButton />}
+          <SignInOutButton isSignedIn={isSignedIn} user={user} />
           <Link href="https://zip-url.vercel.app/roadmap">
             <ListTodo className="h-8 w-8" />
           </Link>
