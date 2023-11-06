@@ -73,7 +73,7 @@ export function CreateShortUrl() {
           placeholder={
             isSignedIn
               ? "Custom alias (optional)"
-              : "Sign in to enable custom alias"
+              : "Sign in to enable custom alias (optional)"
           }
           value={alias}
           onChange={(e) => setAlias(e.target.value)}
