@@ -6,6 +6,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { TRPCReactProvider } from "~/trpc/react";
 import { headers } from "next/headers";
 import Head from "next/head";
+import { Header } from "./_components/header";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -34,7 +35,12 @@ export default function RootLayout({
           ))}
         </Head>
         <body className={`font-sans ${inter.variable}`}>
-          <TRPCReactProvider headers={headers()}>{children}</TRPCReactProvider>
+          <main className="relative flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
+            <Header />
+            <TRPCReactProvider headers={headers()}>
+              {children}
+            </TRPCReactProvider>
+          </main>
         </body>
       </html>
     </ClerkProvider>
