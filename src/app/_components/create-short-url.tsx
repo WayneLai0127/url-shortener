@@ -16,10 +16,7 @@ export function CreateShortUrl() {
   const [alias, setAlias] = useState("");
   const [shortUrl, setShortUrl] = useState("");
   const [originalUrl, setOriginalUrl] = useState("");
-  const { isLoaded: userLoaded, isSignedIn, user } = useUser();
-
-  // Return empty div if user isn't loaded
-  if (!userLoaded) return <div />;
+  const { isSignedIn, user } = useUser();
 
   const createUrlMapping = api.urlMapping.create.useMutation({
     onSuccess: (msg) => {
