@@ -42,6 +42,7 @@ export const urlMappingRouter = createTRPCRouter({
       z.object({
         longUrl: z.string().url("Incorrect url format"),
         alias: z.string().min(1).max(32, "Alias too long"),
+        createdBy: z.string().max(255, "Creator name too long"),
       }),
     )
     .mutation(async ({ ctx, input }) => {
@@ -58,6 +59,7 @@ export const urlMappingRouter = createTRPCRouter({
         data: {
           longUrl: input.longUrl,
           token: input.alias,
+          createdBy: input.createdBy,
         },
       });
     }),
@@ -74,6 +76,19 @@ export const urlMappingRouter = createTRPCRouter({
       ctx.db.urlMapping.findUnique({
         where: {
           token,
+        },
+      }),
+    ),
+
+  getByCreator: privateProcedure
+    .input(z.object({ userId: z.string().max(255, "User Id Too Long") }))
+    .query(({ ctx, input: { userId } }) =>
+      ctx.db.urlMapping.findMany({
+        where: {
+          createdBy: userId,
+        },
+        orderBy: {
+          createdAt: "desc",
         },
       }),
     ),

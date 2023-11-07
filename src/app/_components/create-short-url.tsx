@@ -16,7 +16,7 @@ export function CreateShortUrl() {
   const [alias, setAlias] = useState("");
   const [shortUrl, setShortUrl] = useState("");
   const [originalUrl, setOriginalUrl] = useState("");
-  const { isLoaded: userLoaded, isSignedIn } = useUser();
+  const { isLoaded: userLoaded, isSignedIn, user } = useUser();
 
   // Return empty div if user isn't loaded
   if (!userLoaded) return <div />;
@@ -63,7 +63,11 @@ export function CreateShortUrl() {
         onSubmit={(e) => {
           e.preventDefault();
           if (isSignedIn && alias !== "")
-            createUrlMappingWithAlias.mutate({ longUrl: url, alias });
+            createUrlMappingWithAlias.mutate({
+              longUrl: url,
+              alias,
+              createdBy: user.id,
+            });
           else createUrlMapping.mutate({ longUrl: url });
         }}
         className="flex flex-col gap-4"
