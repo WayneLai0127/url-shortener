@@ -17,13 +17,13 @@ interface UrlTableProps {
 
 const styles = `
   /* CSS-in-JS styling for Next.js */
-  @media (min-width: 768px) {
+  @media (min-width: 1000px) {
     .mobile-table {
       display: none;
     }
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 999px) {
     .table-container {
       display: none;
     }
@@ -36,7 +36,7 @@ export const UrlTable: React.FC<UrlTableProps> = ({
 }) => {
   return (
     <>
-      <div className="rounded-xl bg-white px-5 sm:px-1">
+      <div className="rounded-xl bg-white px-5 sm:px-5">
         <div className="table-container">
           <Table>
             <TableCaption>
@@ -86,7 +86,10 @@ export const UrlTable: React.FC<UrlTableProps> = ({
         </div>
         <div className="mobile-table mx-auto max-w-screen-sm">
           {urlRecords.map((record) => (
-            <div key={record.id} className="mb-8 rounded-lg bg-gray-100 p-4">
+            <div
+              key={record.id}
+              className="mb-8 overflow-hidden text-ellipsis rounded-lg bg-gray-100 px-24 py-4"
+            >
               <div className="text-lg font-bold">Original URL:</div>
               <a href={record.longUrl} target="_blank">
                 <div className="text-sm text-blue-700 sm:text-base">
