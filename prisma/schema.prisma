@@ -20,12 +20,13 @@ model Post {
 }
 
 model UrlMapping {
-  id        String   @id @default(cuid())
-  longUrl   String
-  token     String   @unique
-  expiresAt DateTime @default(dbgenerated("now() + '10 years'::INTERVAL"))
-  createdAt DateTime @default(now())
-  createdBy String   @default("")
+  id         String   @id @default(cuid())
+  longUrl    String
+  token      String   @unique
+  expiresAt  DateTime @default(dbgenerated("now() + '10 years'::INTERVAL"))
+  createdAt  DateTime @default(now())
+  createdBy  String   @default("")
+  clickCount Int      @default(0)
 
   @@index([token, createdBy])
 }

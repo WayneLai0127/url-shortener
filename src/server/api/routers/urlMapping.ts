@@ -92,4 +92,34 @@ export const urlMappingRouter = createTRPCRouter({
         },
       }),
     ),
+
+  increaseClickCount: publicProcedure
+    .input(z.object({ alias: z.string().min(1).max(32) }))
+    .mutation(async ({ ctx, input: { alias } }) => {
+      // Find the URL mapping with the provided alias
+      const urlMapping = await ctx.db.urlMapping.findUnique({
+        where: {
+          token: alias,
+        },
+      });
+
+      if (!urlMapping) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "URL mapping not found",
+        });
+      }
+
+      // Increment the click count
+      const updatedUrlMapping = await ctx.db.urlMapping.update({
+        where: {
+          id: urlMapping.id,
+        },
+        data: {
+          clickCount: urlMapping.clickCount + 1,
+        },
+      });
+
+      return updatedUrlMapping;
+    }),
 });

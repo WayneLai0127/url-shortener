@@ -6,6 +6,7 @@ async function FetchToken({ params }: { params: { token: string } }) {
     token: params.token,
   });
   if (!data) return redirect("/");
+  await api.urlMapping.increaseClickCount.mutate({ alias: params.token });
   return redirect(encodeURI(data.longUrl));
 }
 
