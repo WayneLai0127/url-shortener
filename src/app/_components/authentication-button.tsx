@@ -15,7 +15,9 @@ export const SignInOutButton = ({
   return (
     <div className="flex flex-row gap-4">
       {isSignedIn && (
-        <h3 style={{ marginTop: "4px" }}>Hello, {user!.fullName}</h3>
+        <h3 className="hidden sm:inline-flex" style={{ marginTop: "4px" }}>
+          Hello, {user!.fullName}
+        </h3>
       )}
       {isSignedIn ? <SignOutButton /> : <SignInButton />}
     </div>

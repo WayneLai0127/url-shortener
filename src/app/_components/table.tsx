@@ -36,7 +36,7 @@ export const UrlTable: React.FC<UrlTableProps> = ({
 }) => {
   return (
     <>
-      <div className="rounded-xl bg-white px-5 sm:px-5">
+      <div className="rounded-xl bg-white px-5 sm:px-1">
         {/* Desktop View */}
         <div className="table-container">
           <Table>
@@ -90,11 +90,11 @@ export const UrlTable: React.FC<UrlTableProps> = ({
           {urlRecords.map((record) => (
             <div
               key={record.id}
-              className="mb-8 overflow-hidden text-ellipsis rounded-lg bg-gray-100 px-24 py-4"
+              className="mb-8 flex-row overflow-hidden text-ellipsis rounded-lg bg-gray-100 px-4 py-4"
             >
               <div className="text-lg font-bold">Original URL:</div>
               <a href={record.longUrl} target="_blank">
-                <div className="text-sm text-blue-700 sm:text-base">
+                <div className="break-all text-sm text-blue-700 sm:text-base">
                   {record.longUrl}
                 </div>
               </a>
@@ -104,17 +104,26 @@ export const UrlTable: React.FC<UrlTableProps> = ({
                   {currentUrl}/{record.token}
                 </div>
               </a>
-              <div className="mt-4 text-lg font-bold">Click Count:</div>
-              <div className="text-sm text-gray-600 sm:text-base">
-                {record.clickCount}
-              </div>
-              <div className="mt-4 text-lg font-bold">Created At:</div>
-              <div className="text-sm text-gray-600 sm:text-base">
-                {dayjs(record.createdAt).format("YYYY-MM-DD")}
-              </div>
-              <div className="mt-4 text-lg font-bold">Expires At:</div>
-              <div className="text-sm text-gray-600 sm:text-base">
-                {dayjs(record.expiresAt).format("YYYY-MM-DD")}
+              {/* smaller elements */}
+              <div className="mt-4 flex flex-col space-x-px sm:flex-row">
+                <div className="flex flex-row py-1">
+                  <div className="text-lg font-bold">Click Count:</div>
+                  <div className="text-md mt-0.5 object-bottom px-4 text-gray-600 sm:text-base">
+                    {record.clickCount}
+                  </div>
+                </div>
+                <div className="flex flex-row py-1">
+                  <div className="text-lg font-bold">Created At:</div>
+                  <div className="text-md mt-0.5 object-bottom px-4 text-gray-600 sm:text-base">
+                    {dayjs(record.createdAt).format("YYYY-MM-DD")}
+                  </div>
+                </div>
+                <div className="flex flex-row py-1">
+                  <div className="text-lg font-bold">Expires At:</div>
+                  <div className="text-md mt-0.5 object-bottom px-4 text-gray-600 sm:text-base">
+                    {dayjs(record.expiresAt).format("YYYY-MM-DD")}
+                  </div>
+                </div>
               </div>
             </div>
           ))}
