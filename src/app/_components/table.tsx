@@ -37,6 +37,7 @@ export const UrlTable: React.FC<UrlTableProps> = ({
   return (
     <>
       <div className="rounded-xl bg-white px-5 sm:px-5">
+        {/* Desktop View */}
         <div className="table-container">
           <Table>
             <TableCaption>
@@ -84,6 +85,7 @@ export const UrlTable: React.FC<UrlTableProps> = ({
             </TableBody>
           </Table>
         </div>
+        {/* Mobile View */}
         <div className="mobile-table mx-auto max-w-screen-sm">
           {urlRecords.map((record) => (
             <div
