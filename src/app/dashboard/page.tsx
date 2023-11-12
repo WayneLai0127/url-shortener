@@ -2,7 +2,8 @@
 import { RedirectToSignIn, useUser } from "@clerk/nextjs";
 import { api } from "~/trpc/react";
 import { useRouter } from "next/navigation";
-import { UrlTable } from "../_components/table";
+import { UrlTable } from "../_components/dashboard-skeleton";
+import { UrlTableSkeleton } from "../_components/dashboard-table-skeleton";
 
 export default function Home() {
   const router = useRouter();
@@ -14,15 +15,21 @@ export default function Home() {
   const { data: urlRecords, isLoading } = api.urlMapping.getByCreator.useQuery({
     userId: user.id,
   });
-  if (isLoading) return <div />;
-  if (!urlRecords) return <p> System error </p>;
+
   return (
     <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
       <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
         Your Shortened <span className="text-[hsl(280,100%,70%)]">URL</span>
       </h1>
       <div className="rounded-xl bg-white px-5 py-5 text-black">
-        <UrlTable urlRecords={urlRecords} currentUrl={window.location.origin} />
+        {isLoading || !urlRecords ? (
+          <UrlTableSkeleton />
+        ) : (
+          <UrlTable
+            urlRecords={urlRecords}
+            currentUrl={window.location.origin}
+          />
+        )}
       </div>
     </div>
   );
