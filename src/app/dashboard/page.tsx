@@ -1,12 +1,9 @@
 "use client";
 import { RedirectToSignIn, useUser } from "@clerk/nextjs";
 import { api } from "~/trpc/react";
-import { useRouter } from "next/navigation";
-import { UrlTable } from "../_components/dashboard-skeleton";
-import { UrlTableSkeleton } from "../_components/dashboard-table-skeleton";
+import { UrlTable, UrlTableSkeleton } from "../_components/dashboard-table";
 
 export default function Home() {
-  const router = useRouter();
   const { isLoaded: userLoaded, isSignedIn, user } = useUser();
   // Return empty div if user isn't loaded
   if (!userLoaded) return <div />;
