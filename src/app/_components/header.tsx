@@ -27,14 +27,12 @@ export const Header = () => {
       <div className="absolute right-0 top-0 p-4">
         <div className="flex flex-row gap-4">
           <SignInOutButton isSignedIn={isSignedIn} user={user} />
-          {isSignedIn && (
-            <Link
-              href={window.location.origin + "/dashboard"}
-              style={{ marginTop: "4px" }}
-            >
-              Dashboard
-            </Link>
-          )}
+          <Link
+            href={window.location.origin + "/dashboard"}
+            style={{ marginTop: "4px" }}
+          >
+            Dashboard
+          </Link>
           <Link href="https://zip-url.vercel.app/roadmap">
             <ListTodo className="h-8 w-8" />
           </Link>

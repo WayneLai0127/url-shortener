@@ -1,5 +1,5 @@
 "use client";
-import { useUser } from "@clerk/nextjs";
+import { RedirectToSignIn, useUser } from "@clerk/nextjs";
 import { api } from "~/trpc/react";
 import { useRouter } from "next/navigation";
 import { UrlTable } from "../_components/table";
@@ -10,7 +10,7 @@ export default function Home() {
   // Return empty div if user isn't loaded
   if (!userLoaded) return <div />;
 
-  if (!isSignedIn) return router.push("/");
+  if (!isSignedIn) return <RedirectToSignIn />;
   const { data: urlRecords, isLoading } = api.urlMapping.getByCreator.useQuery({
     userId: user.id,
   });
