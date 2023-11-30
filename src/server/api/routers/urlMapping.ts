@@ -122,4 +122,18 @@ export const urlMappingRouter = createTRPCRouter({
 
       return updatedUrlMapping;
     }),
+
+  deleteById: privateProcedure
+    .input(
+      z.object({
+        id: z.string().max(255),
+      }),
+    )
+    .mutation(({ ctx, input: { id } }) =>
+      ctx.db.urlMapping.delete({
+        where: {
+          id,
+        },
+      }),
+    ),
 });
