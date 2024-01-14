@@ -14,7 +14,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@clerk/nextjs": "^4.25.6",
+    "@clerk/nextjs": "^4.29.3",
     "@prisma/client": "^5.1.1",
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-slot": "^1.0.2",
@@ -48,7 +48,7 @@
     "@typescript-eslint/parser": "^6.3.0",
     "autoprefixer": "^10.4.14",
     "eslint": "^8.47.0",
-    "eslint-config-next": "^13.5.4",
+    "eslint-config-next": "^14.0.4",
     "husky": "^8.0.3",
     "postcss": "^8.4.27",
     "prettier": "^3.0.0",
