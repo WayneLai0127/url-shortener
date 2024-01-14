@@ -2,6 +2,7 @@ import "~/styles/globals.css";
 
 import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Analytics } from "@vercel/analytics/react";
 
 import { TRPCReactProvider } from "~/trpc/react";
 import { headers } from "next/headers";
@@ -41,6 +42,7 @@ export default function RootLayout({
               {children}
             </TRPCReactProvider>
           </main>
+          <Analytics />
         </body>
       </html>
     </ClerkProvider>
