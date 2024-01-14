@@ -27,10 +27,7 @@ export const Header = () => {
       <div className="absolute right-0 top-0 p-4">
         <div className="flex flex-row gap-4">
           <SignInOutButton isSignedIn={isSignedIn} user={user} />
-          <Link
-            href={window.location.origin + "/dashboard"}
-            style={{ marginTop: "4px" }}
-          >
+          <Link href="/dashboard" style={{ marginTop: "4px" }}>
             Dashboard
           </Link>
           <Link href="https://zip-url.vercel.app/roadmap">
