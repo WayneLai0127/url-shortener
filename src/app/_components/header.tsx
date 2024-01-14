@@ -6,14 +6,13 @@ import { SignInOutButton } from "./authentication-button";
 import { Github, ListTodo } from "lucide-react";
 import { Home } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { HeaderUserLoading } from "./header-user-loading";
 
 export const Header = () => {
-  const { isLoaded: userLoaded, isSignedIn, user } = useUser();
+  const { isLoaded: isUserLoaded, isSignedIn, user } = useUser();
   // Return empty div if user isn't loaded
   const pathname = usePathname();
   const isHome = pathname === "/";
-
-  if (!userLoaded) return <div />;
 
   return (
     <header>
@@ -26,7 +25,11 @@ export const Header = () => {
       )}
       <div className="absolute right-0 top-0 p-4">
         <div className="flex flex-row gap-4">
-          <SignInOutButton isSignedIn={isSignedIn} user={user} />
+          {isUserLoaded ? (
+            <SignInOutButton isSignedIn={isSignedIn} user={user} />
+          ) : (
+            <HeaderUserLoading />
+          )}
           <Link href="/dashboard" style={{ marginTop: "4px" }}>
             Dashboard
           </Link>
