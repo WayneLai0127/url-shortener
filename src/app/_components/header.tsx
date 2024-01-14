@@ -18,7 +18,7 @@ export const Header = () => {
     <header>
       {!isHome && (
         <div className="absolute left-0 top-0 p-4">
-          <Link href={window.location.origin}>
+          <Link href="/">
             <Home className="h-8 w-8" />
           </Link>
         </div>
