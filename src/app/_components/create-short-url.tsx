@@ -94,12 +94,12 @@ export function CreateShortUrl() {
             type="submit"
             className="rounded-full bg-white/10 px-5 py-3 font-semibold transition hover:bg-white/20"
             disabled={
-              createUrlMapping.isLoading ||
-              createUrlMappingWithAlias.isLoading ||
+              createUrlMapping.isPending ||
+              createUrlMappingWithAlias.isPending ||
               url === ""
             }
           >
-            {createUrlMapping.isLoading || createUrlMappingWithAlias.isLoading
+            {createUrlMapping.isPending || createUrlMappingWithAlias.isPending
               ? "Shortening..."
               : "Shorten"}
           </button>

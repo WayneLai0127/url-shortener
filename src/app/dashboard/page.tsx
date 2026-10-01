@@ -5,13 +5,17 @@ import { UrlTable, UrlTableSkeleton } from "../_components/dashboard-table";
 
 export default function Home() {
   const { isLoaded: userLoaded, isSignedIn, user } = useUser();
+  // Hooks must run unconditionally (rules-of-hooks), so the query is declared
+  // before the early returns and only enabled once a signed-in user is known.
+  const { data: urlRecords, isLoading } = api.urlMapping.getByCreator.useQuery(
+    { userId: user?.id ?? "" },
+    { enabled: !!isSignedIn && !!user },
+  );
+
   // Return empty div if user isn't loaded
   if (!userLoaded) return <div />;
 
   if (!isSignedIn) return <RedirectToSignIn />;
-  const { data: urlRecords, isLoading } = api.urlMapping.getByCreator.useQuery({
-    userId: user.id,
-  });
 
   return (
     <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
