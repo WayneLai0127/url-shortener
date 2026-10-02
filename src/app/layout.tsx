@@ -6,8 +6,6 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { TRPCReactProvider } from "~/trpc/react";
-import { headers } from "next/headers";
-import Head from "next/head";
 import { Header } from "./_components/header";
 
 const inter = Inter({
@@ -27,26 +25,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <Head>
-          <title>{metadata.title}</title>
-          <meta name="description" content={metadata.description} />
-          {metadata.icons.map((icon, index) => (
-            <link key={index} rel={icon.rel} href={icon.url} />
-          ))}
-        </Head>
-        <body className={`font-sans ${inter.variable}`}>
+    <html lang="en">
+      <body className={`font-sans ${inter.variable}`}>
+        {/* Clerk Core 3 (@clerk/nextjs v7) requires ClerkProvider inside <body> */}
+        <ClerkProvider>
           <main className="relative flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
             <Header />
-            <TRPCReactProvider headers={headers()}>
-              {children}
-            </TRPCReactProvider>
+            <TRPCReactProvider>{children}</TRPCReactProvider>
           </main>
-          <Analytics />
-          <SpeedInsights />
-        </body>
-      </html>
-    </ClerkProvider>
+        </ClerkProvider>
+        <Analytics />
+        <SpeedInsights />
+      </body>
+    </html>
   );
 }

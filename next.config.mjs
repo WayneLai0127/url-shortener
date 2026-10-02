@@ -6,13 +6,11 @@ await import("./src/env.mjs");
 
 /** @type {import("next").NextConfig} */
 const config = {
+  // Type checking runs separately via `npm run typecheck`.
+  // (`eslint` and `swcMinify` options were removed in Next.js 16 / 15.)
   typescript: {
     ignoreBuildErrors: true,
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  swcMinify: true,
 };
 
 export default config;

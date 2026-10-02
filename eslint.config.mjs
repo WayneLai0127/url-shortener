@@ -1,0 +1,47 @@
+import { defineConfig, globalIgnores } from "eslint/config";
+import nextVitals from "eslint-config-next/core-web-vitals";
+import tseslint from "typescript-eslint";
+
+// ESLint 9 flat config. Ported from the former `.eslintrc.cjs`
+// (next/core-web-vitals + typescript-eslint recommended/stylistic type-checked).
+export default defineConfig(
+  globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts"]),
+  ...nextVitals,
+  {
+    files: ["**/*.ts", "**/*.tsx"],
+    extends: [
+      ...tseslint.configs.recommendedTypeChecked,
+      ...tseslint.configs.stylisticTypeChecked,
+    ],
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+    rules: {
+      // These opinionated rules are enabled in stylistic-type-checked above.
+      // Feel free to reconfigure them to your own preference.
+      "@typescript-eslint/array-type": "off",
+      "@typescript-eslint/consistent-type-definitions": "off",
+
+      "@typescript-eslint/consistent-type-imports": [
+        "warn",
+        {
+          prefer: "type-imports",
+          fixStyle: "inline-type-imports",
+        },
+      ],
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        { argsIgnorePattern: "^_" },
+      ],
+      "@typescript-eslint/no-misused-promises": [
+        "error",
+        {
+          checksVoidReturn: { attributes: false },
+        },
+      ],
+    },
+  },
+);
